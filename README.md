@@ -14,7 +14,7 @@ $ git clone https://github.com/gryansf/vagrant-puppetdb.git
 $ cd vagrant-puppetdb
 $ vagrant up
 ```
-Once vagrant brings up the VM, shell in install and configure puppetdb-cli 
+Once vagrant brings up the VM, install and configure puppetdb-cli 
 ```
 $ vagrant ssh
 $ # sudo su -
