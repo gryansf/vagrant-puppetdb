@@ -64,6 +64,7 @@ Vagrant.configure("2") do |config|
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-EOF
+     sudo export DEBIAN_FRONTEND=noninteractive
      sudo curl -o /tmp/puppet6-release-focal.deb https://apt.puppetlabs.com/puppet6-release-focal.deb
      sudo dpkg -i /tmp/puppet6-release-focal.deb
      sudo apt-get update
@@ -84,6 +85,6 @@ Vagrant.configure("2") do |config|
      sudo echo -e "${ipaddress}\t${fqdn}\tpuppetdb\tpuppet" >> /etc/hosts
      sudo /opt/puppetlabs/puppet/bin/puppet agent -t
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e "class { 'puppetdb::master::config': masterless => true, enable_reports => true, enable_storeconfigs => true, restart_puppet => true, manage_routes => true, manage_config => true, manage_storeconfigs => true, manage_report_processor => true}" --modulepath /tmp
-     sudo /opt/puppetlabs/puppet/bin/puppet apply -e 'notify { "test dbconn": }' --debug
+     sudo /opt/puppetlabs/puppet/bin/puppet apply -e 'notify { "test puppetdb": }' --debug
   EOF
 end
