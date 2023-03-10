@@ -57,7 +57,7 @@ Vagrant.configure("2") do |config|
      sudo echo -e "${ipaddress}\t${fqdn}\tpuppetdb\tpuppet" >> /etc/hosts
      sudo /opt/puppetlabs/puppet/bin/puppet agent -t
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e "class { 'puppetdb::master::config': enable_reports => true, enable_storeconfigs => true, restart_puppet => true, manage_routes => true, manage_config => true, manage_storeconfigs => true, manage_report_processor => true}" --modulepath /tmp
-     sudo /opt/puppetlabs/puppet/bin/puppet apply -e "\$config = { 'puppetdb' => { 'server_urls' => [ 'https://$fqdn:8081' ], 'cacert' => '$cacert', 'cert' => '$cert', 'key' => '$key' } }; file { ['/root/.puppetlabs','/root/.puppetlabs/client-tools']: ensure => directory, }; file { '/root/.puppetlabs/client-tools/puppetdb.conf':  ensure => present, content => \$config.to_json(), }" --modulepath /tmp
+     sudo /opt/puppetlabs/puppet/bin/puppet apply -e "\$config = { 'puppetdb' => { 'server_urls' => [ 'https://${fqdn}:8081' ], 'cacert' => '${cacert}', 'cert' => '${cert}', 'key' => '${key}' } }; file { ['/root/.puppetlabs','/root/.puppetlabs/client-tools']: ensure => directory, }; file { '/root/.puppetlabs/client-tools/puppetdb.conf': ensure => present, content => \$config.to_json(), }" --modulepath /tmp
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e "notify { 'test puppetdb': }" --debug
      sudo puppet-db status
   EOF
