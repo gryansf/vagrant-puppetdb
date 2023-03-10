@@ -16,14 +16,14 @@ $ git clone https://github.com/gryansf/vagrant-puppetdb.git
 - [https://www.virtualbox.org/](https://www.virtualbox.org/wiki/Downloads)
 - [http://www.vagrantup.com/](https://developer.hashicorp.com/vagrant/downloads)
 
-Runtime
+Build
 -------
 ```
 $ cd vagrant-puppetdb
 $ vagrant up
 ```
 
-Post-installation
+Post-config
 -----------------
 ```
 $ vagrant ssh
