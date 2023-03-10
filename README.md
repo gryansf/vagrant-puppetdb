@@ -1,18 +1,23 @@
 # vagrant-puppetdb
 Bootstrap Puppetserver and PuppetDB with Puppet on Ubuntu Linux 20.04 LTS (Focal Fossa)
+
 ##Setup
+
 ####MacOS Requirements
 - brew cask install virtualbox
 - brew cask install vagrant
+
 ####Others
 - [https://www.virtualbox.org/](https://www.virtualbox.org/wiki/Downloads)
 - [http://www.vagrantup.com/](https://developer.hashicorp.com/vagrant/downloads)
+
 ##Runtime
 ```
 $ git clone https://github.com/gryansf/vagrant-puppetdb.git
 $ cd vagrant-puppetdb
 $ vagrant up
 ```
+
 ##After vagrant brings up the VM, shell in and poke around
 ```
 $ vagrant ssh
@@ -20,6 +25,7 @@ $ # sudo su -
 $ # puppet-query 'nodes[certname]{}'
 $ # puppet-db status
 ```
+
 ####Puppet modules used
 - theforeman-puppet (v16.5.0)
 - puppet-extlib (v6.2.0)
@@ -33,6 +39,7 @@ $ # puppet-db status
 - puppetlabs-apt (v9.0.1)
 - puppetlabs-stdlib (v8.5.0)
 - puppetlabs-host_core (v1.2.0)
+
 ####Check out more here
 - https://www.puppet.com/docs/puppetdb/6/pdb_client_tools.html
 - https://github.com/puppetlabs/puppetdb-cli
