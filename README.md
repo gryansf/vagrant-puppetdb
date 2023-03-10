@@ -30,4 +30,6 @@ Place the following into the puppetdb.conf file we created above:
 Finally, run:
 ```
 $ # puppet-query 'nodes[certname]{}'
+$ # puppet-db status
 ```
+Check out more here: https://github.com/puppetlabs/puppetdb-cli
