@@ -3,6 +3,9 @@ Bootstrap Puppetserver with PuppetDB
 ```
 $ cd vagrant-puppetdb
 $ vagrant up
+```
+Install puppetdb-cli 
+```
 $ vagrant ssh
 $ # sudo su -
 $ # apt-get install -y ruby
