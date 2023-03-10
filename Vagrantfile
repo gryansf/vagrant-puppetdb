@@ -33,7 +33,6 @@ Vagrant.configure("2") do |config|
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-EOF
-     export DEBIAN_FRONTEND=noninteractive
      test -f /tmp/puppet6-release-focal.deb 2>/dev/null || sudo curl -s -o /tmp/puppet6-release-focal.deb https://apt.puppetlabs.com/puppet6-release-focal.deb
      sudo dpkg -i /tmp/puppet6-release-focal.deb
      sudo apt-get update
