@@ -1,10 +1,20 @@
 # vagrant-puppetdb
 Bootstrap Puppetserver and PuppetDB with Puppet on Ubuntu Linux 20.04 LTS (Focal Fossa) 
+
+MacOS Requirements
+- brew cask install virtualbox
+- brew cask install vagrant
+
+Others
+- [https://www.virtualbox.org/](https://www.virtualbox.org/wiki/Downloads)
+- [http://www.vagrantup.com/](https://developer.hashicorp.com/vagrant/downloads)
+
 ```
+$ git clone https://github.com/gryansf/vagrant-puppetdb.git
 $ cd vagrant-puppetdb
 $ vagrant up
 ```
-Install puppetdb-cli 
+Once vagrant brings up the VM, shell in install and configure puppetdb-cli 
 ```
 $ vagrant ssh
 $ # sudo su -
