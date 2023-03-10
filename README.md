@@ -1,5 +1,5 @@
 # vagrant-puppetdb
-Bootstrap Puppetserver with PuppetDB 
+Bootstrap Puppetserver and PuppetDB with Puppet
 ```
 $ cd vagrant-puppetdb
 $ vagrant up
