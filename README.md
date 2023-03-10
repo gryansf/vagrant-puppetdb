@@ -5,7 +5,7 @@ Setup
 -----
 
 *MacOS Requirements*
-- https://docs.brew.sh/Installation
+- [https://brew.sh](https://docs.brew.sh/Installation)
 - brew cask install virtualbox
 - brew cask install vagrant
 
