@@ -1,5 +1,5 @@
 # vagrant-puppetdb
-Bootstrap Puppetserver and PuppetDB with Puppet
+Bootstrap Puppetserver and PuppetDB with Puppet on Ubuntu Linux 20.04 LTS (Focal Fossa) 
 ```
 $ cd vagrant-puppetdb
 $ vagrant up
