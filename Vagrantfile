@@ -54,7 +54,7 @@ Vagrant.configure("2") do |config|
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e "class { 'puppetdb::master::config': enable_reports => true, enable_storeconfigs => true, restart_puppet => true, manage_routes => true, manage_config => true, manage_storeconfigs => true, manage_report_processor => true}" --modulepath /tmp
      sudo mkdir -p /root/.puppetlabs/client-tools
      sudo gem install --bindir /opt/puppetlabs/bin puppetdb_cli
-     sudo /opt/puppetlabs/puppet/bin/puppet apply -e '$puppetdb = { "puppetdb" => { "server_urls" => [ "https://${fqdn}:8081" ], "cacert" => "/etc/puppetlabs/puppet/ssl/certs/ca.pem", "cert" => "/etc/puppetlabs/puppet/ssl/certs/${fqdn}.pem", "key" => "/etc/puppetlabs/puppet/ssl/private_keys/${fqdn}.pem" } }; file { "/root/.puppetlabs/client-tools/puppetdb.conf": ensure => present, content => $puppetdb.to_json() }' --modulepath /tmp
+     sudo /opt/puppetlabs/puppet/bin/puppet apply -e '$content = { "puppetdb" => { "server_urls" => [ "https://${fqdn}:8081" ], "cacert" => "/etc/puppetlabs/puppet/ssl/certs/ca.pem", "cert" => "/etc/puppetlabs/puppet/ssl/certs/${fqdn}.pem", "key" => "/etc/puppetlabs/puppet/ssl/private_keys/${fqdn}.pem" } }; file { "/root/.puppetlabs/client-tools/puppetdb.conf": ensure => present, content => $content.to_json() }' --modulepath /tmp
      #sudo /opt/puppetlabs/puppet/bin/puppet apply -e "notify { 'DEBUG puppetdb reports': }" --debug
      /opt/puppetlabs/bin/puppet-db status
   EOF
