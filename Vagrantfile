@@ -23,6 +23,10 @@ Vagrant.configure("2") do |config|
      sudo /opt/puppetlabs/puppet/bin/puppet agent -t
      sudo test -f /etc/puppetlabs/puppetdb/ssl/ca.pem || sudo /opt/puppetlabs/bin/puppetdb ssl-setup -f
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e "class { 'puppetdb': listen_address => '0.0.0.0', ssl_set_cert_paths => true, ssl_deploy_certs => false, ssl_key => 'file:///etc/puppetlabs/puppet/ssl/private_keys/%{trusted.certname}.pem', ssl_cert => 'file:///etc/puppetlabs/puppet/ssl/certs/%{trusted.certname}.pem', ssl_ca_cert => 'file:///etc/puppetlabs/puppet/ssl/certs/ca.pem', manage_firewall => false, merge_default_java_args => true, java_args => {'-Djava.net.preferIPv4Stack' => '=true'}}" --modulepath /tmp
-
+     ipaddress=$(/opt/puppetlabs/puppet/bin/facter ipaddress)
+     fqdn=$(/opt/puppetlabs/puppet/bin/facter fqdn)
+     sudo sed -i "/^127.0.1.1/d" /etc/hosts
+     sudo echo -e "${ipaddress}\t${fqdn}" >> /etc/hosts
+     sudo /opt/puppetlabs/puppet/bin/puppet agent -t
   EOF
 end
