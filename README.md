@@ -6,8 +6,10 @@ Setup
 
 *MacOS Requirements*
 - [https://brew.sh](https://docs.brew.sh/Installation)
-- brew cask install virtualbox
-- brew cask install vagrant
+```
+$ brew cask install virtualbox
+$ brew cask install vagrant
+```
 
 *Other Operating Systems*
 - [https://www.virtualbox.org/](https://www.virtualbox.org/wiki/Downloads)
