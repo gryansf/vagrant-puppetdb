@@ -10,7 +10,6 @@ Setup
 $ brew cask install virtualbox
 $ brew cask install vagrant
 $ git clone https://github.com/gryansf/vagrant-puppetdb.git
-$ cd vagrant-puppetdb
 ```
 
 *Other Operating Systems*
@@ -20,6 +19,7 @@ $ cd vagrant-puppetdb
 Runtime
 -------
 ```
+$ cd vagrant-puppetdb
 $ vagrant up
 ```
 
