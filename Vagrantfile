@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
      ipaddress=$(/opt/puppetlabs/puppet/bin/facter ipaddress)
      fqdn=$(/opt/puppetlabs/puppet/bin/facter fqdn)
      sudo sed -i "/^127.0.1.1/d" /etc/hosts
-     sudo sed -i "1s/^/${ipaddress}\t${fqdn}\tpuppetdb\tpuppet\n/" /etc/hosts
+     sudo echo -e "${ipaddress}\t${fqdn}\tpuppetdb\tpuppet" >> /etc/hosts
      sudo /opt/puppetlabs/puppet/bin/puppet agent -t
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e "class { 'puppetdb::master::config': enable_reports => true, enable_storeconfigs => true, restart_puppet => true, manage_routes => true, manage_config => true, manage_storeconfigs => true, manage_report_processor => true}" --modulepath /tmp
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e "notify { 'test puppetdb': }" --debug
