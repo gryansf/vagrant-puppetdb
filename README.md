@@ -30,7 +30,8 @@ $ # puppet-query 'nodes[certname]{}'
 $ # puppet-db status
 ```
 
-*Puppet modules*
+Puppet modules
+--------------
 - theforeman-puppet (v16.5.0)
 - puppet-extlib (v6.2.0)
 - puppet-systemd (v4.0.1)
@@ -44,7 +45,8 @@ $ # puppet-db status
 - puppetlabs-stdlib (v8.5.0)
 - puppetlabs-host_core (v1.2.0)
 
-*More here*
+More here
+---------
 - https://www.puppet.com/docs/puppetdb/6/pdb_client_tools.html
 - https://github.com/puppetlabs/puppetdb-cli
 - https://www.puppet.com/docs/puppetdb/6/api/query/tutorial.html
