@@ -50,10 +50,15 @@ Vagrant.configure("2") do |config|
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e "class { 'puppetdb': listen_address => '0.0.0.0', ssl_set_cert_paths => true, ssl_deploy_certs => false, ssl_key => 'file:///etc/puppetlabs/puppet/ssl/private_keys/%{trusted.certname}.pem', ssl_cert => 'file:///etc/puppetlabs/puppet/ssl/certs/%{trusted.certname}.pem', ssl_ca_cert => 'file:///etc/puppetlabs/puppet/ssl/certs/ca.pem', manage_firewall => false, merge_default_java_args => true, java_args => {'-Djava.net.preferIPv4Stack' => '=true'}}" --modulepath /tmp
      ipaddress=$(/opt/puppetlabs/puppet/bin/facter ipaddress)
      fqdn=$(/opt/puppetlabs/puppet/bin/facter fqdn)
+     cacert=$(/opt/puppetlabs/puppet/bin/puppet config print localcacert)
+     key=$(/opt/puppetlabs/puppet/bin/puppet config print hostprivkey)
+     cert=$(/opt/puppetlabs/puppet/bin/puppet config print hostcert)
      sudo sed -i "/^127.0.1.1/d" /etc/hosts
      sudo echo -e "${ipaddress}\t${fqdn}\tpuppetdb\tpuppet" >> /etc/hosts
      sudo /opt/puppetlabs/puppet/bin/puppet agent -t
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e "class { 'puppetdb::master::config': enable_reports => true, enable_storeconfigs => true, restart_puppet => true, manage_routes => true, manage_config => true, manage_storeconfigs => true, manage_report_processor => true}" --modulepath /tmp
+     sudo /opt/puppetlabs/puppet/bin/puppet apply -e "\$config = { 'puppetdb' => { 'server_urls' => [ 'https://$fqdn:8081' ], 'cacert' => '$cacert', 'cert' => '$cert', 'key' => '$key' } }; file { ['/root/.puppetlabs','/root/.puppetlabs/client-tools']: ensure => directory, }; file { '/root/.puppetlabs/client-tools/puppetdb.conf':  ensure => present, content => \$config.to_json(), }" --modulepath /tmp
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e "notify { 'test puppetdb': }" --debug
+     sudo puppet-db status
   EOF
 end
