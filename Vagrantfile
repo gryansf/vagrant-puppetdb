@@ -47,16 +47,16 @@ Vagrant.configure("2") do |config|
      sudo /opt/puppetlabs/puppet/bin/puppet resource package postgresql ensure=latest
      sudo /opt/puppetlabs/puppet/bin/puppet resource package postgresql-contrib ensure=latest
      sudo /opt/puppetlabs/puppet/bin/puppet resource service apparmor ensure=stopped
+     sudo /opt/puppetlabs/puppet/bin/puppet apply -e 'host { "localhost": ensure => present, host_aliases => ["${fqdn}", "puppet", "puppetdb"], ip => "${ipaddress}", }' --modulepath /tmp
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e "class { 'puppet': server_foreman => false, server => true, server_ca => true, server_crl_enable => true, server_ca_auth_required => true, server_ca_allow_sans => true, server_ca_enable_infra_crl => true, server_ca_allow_auth_extensions => true, server_ca_crl_sync => true, server_ca_client_whitelist => ['localhost'], dns_alt_names => ['puppet'], server_reports => store, server_jvm_extra_args => ['-Djava.net.preferIPv4Stack=true'], server_external_nodes => ''}" --modulepath /tmp
      test -f /etc/puppetlabs/puppetdb/ssl/ca.pem 2>/dev/null || sudo /opt/puppetlabs/bin/puppetdb ssl-setup -f
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e "class { 'puppetdb': listen_address => '0.0.0.0', ssl_set_cert_paths => true, ssl_deploy_certs => false, ssl_key => 'file:///etc/puppetlabs/puppet/ssl/private_keys/%{trusted.certname}.pem', ssl_cert => 'file:///etc/puppetlabs/puppet/ssl/certs/%{trusted.certname}.pem', ssl_ca_cert => 'file:///etc/puppetlabs/puppet/ssl/certs/ca.pem', manage_firewall => false, merge_default_java_args => true, java_args => {'-Djava.net.preferIPv4Stack' => '=true'}}" --modulepath /tmp
-     sudo /opt/puppetlabs/puppet/bin/puppet apply -e 'host { "localhost": ensure => present, host_aliases => ["${fqdn}", "puppet", "puppetdb"], ip => "${ipaddress}", }' --modulepath /tmp
-     sudo /opt/puppetlabs/puppet/bin/puppet agent -t
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e "class { 'puppetdb::master::config': enable_reports => true, enable_storeconfigs => true, restart_puppet => true, manage_routes => true, manage_config => true, manage_storeconfigs => true, manage_report_processor => true}" --modulepath /tmp
+     sudo /opt/puppetlabs/puppet/bin/puppet apply -e "class { 'puppet': server_foreman => false, server => true, server_ca => true, server_reports => puppetdb, server_external_nodes => ''}" --modulepath /tmp
+     sudo /opt/puppetlabs/puppet/bin/puppet agent -t
      sudo mkdir -p /root/.puppetlabs/client-tools
      sudo gem install --bindir /opt/puppetlabs/bin puppetdb_cli
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e '$content = { "puppetdb" => { "server_urls" => [ "https://${fqdn}:8081" ], "cacert" => "/etc/puppetlabs/puppet/ssl/certs/ca.pem", "cert" => "/etc/puppetlabs/puppet/ssl/certs/${fqdn}.pem", "key" => "/etc/puppetlabs/puppet/ssl/private_keys/${fqdn}.pem" } }; file { "/root/.puppetlabs/client-tools/puppetdb.conf": ensure => present, content => $content.to_json() }'
-     sudo /opt/puppetlabs/puppet/bin/puppet apply -e "class { 'puppet': server_foreman => false, server => true, server_ca => true, server_reports => puppetdb, server_external_nodes => ''}" --modulepath /tmp
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e "notify { 'DEBUG puppetdb reports': }" --debug
      /opt/puppetlabs/bin/puppet-db status
   EOF
