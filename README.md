@@ -9,12 +9,16 @@ Setup
 ```
 $ brew cask install virtualbox
 $ brew cask install vagrant
-$ git clone https://github.com/gryansf/vagrant-puppetdb.git
 ```
 
 *Other Operating Systems*
-- [https://www.virtualbox.org/](https://www.virtualbox.org/wiki/Downloads)
+- You will need a hypervisor. Options are [https://www.virtualbox.org/](https://www.virtualbox.org/wiki/Downloads)
 - [http://www.vagrantup.com/](https://developer.hashicorp.com/vagrant/downloads)
+
+*Clone the repo to your local system*
+```
+$ git clone https://github.com/gryansf/vagrant-puppetdb.git
+```
 
 Build
 -------
