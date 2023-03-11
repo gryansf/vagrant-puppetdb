@@ -36,7 +36,7 @@ Vagrant.configure("2") do |config|
      test -f /tmp/puppet6-release-focal.deb 2>/dev/null || sudo curl -s -o /tmp/puppet6-release-focal.deb https://apt.puppetlabs.com/puppet6-release-focal.deb
      sudo dpkg -i /tmp/puppet6-release-focal.deb
      sudo apt-get update
-     sudo dpkg -l puppet-agent 2>/dev/null || sudo apt-get install -y puppet-agent 2>/dev/null
+     dpkg -l puppet-agent 2>/dev/null || sudo apt-get install -y puppet-agent 2>/dev/null
      sudo /opt/puppetlabs/puppet/bin/puppet module install theforeman-puppet --version 16.5.0 --target-dir /tmp
      sudo /opt/puppetlabs/puppet/bin/puppet module install puppetlabs-puppetdb --version 7.12.0 --target-dir /tmp
      sudo /opt/puppetlabs/puppet/bin/puppet module install puppetlabs-host_core --version 1.2.0 --target-dir /tmp
@@ -48,7 +48,7 @@ Vagrant.configure("2") do |config|
      sudo /opt/puppetlabs/puppet/bin/puppet resource package postgresql-contrib ensure=latest
      sudo /opt/puppetlabs/puppet/bin/puppet resource service apparmor ensure=stopped
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e "class { 'puppet': server_foreman => false, server => true, server_ca => true, server_crl_enable => true, server_ca_auth_required => true, server_ca_allow_sans => true, server_ca_enable_infra_crl => true, server_ca_allow_auth_extensions => true, server_ca_crl_sync => true, server_ca_client_whitelist => ['localhost'], dns_alt_names => ['puppet'], server_reports => store, server_jvm_extra_args => ['-Djava.net.preferIPv4Stack=true'], server_external_nodes => ''}" --modulepath /tmp
-     sudo test -f /etc/puppetlabs/puppetdb/ssl/ca.pem 2>/dev/null || sudo /opt/puppetlabs/bin/puppetdb ssl-setup -f
+     test -f /etc/puppetlabs/puppetdb/ssl/ca.pem 2>/dev/null || sudo /opt/puppetlabs/bin/puppetdb ssl-setup -f
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e "class { 'puppetdb': listen_address => '0.0.0.0', ssl_set_cert_paths => true, ssl_deploy_certs => false, ssl_key => 'file:///etc/puppetlabs/puppet/ssl/private_keys/%{trusted.certname}.pem', ssl_cert => 'file:///etc/puppetlabs/puppet/ssl/certs/%{trusted.certname}.pem', ssl_ca_cert => 'file:///etc/puppetlabs/puppet/ssl/certs/ca.pem', manage_firewall => false, merge_default_java_args => true, java_args => {'-Djava.net.preferIPv4Stack' => '=true'}}" --modulepath /tmp
      sudo /opt/puppetlabs/puppet/bin/puppet apply -e 'host { "localhost": ensure => present, host_aliases => ["${fqdn}", "puppet", "puppetdb"], ip => "${ipaddress}", }' --modulepath /tmp
      sudo /opt/puppetlabs/puppet/bin/puppet agent -t
