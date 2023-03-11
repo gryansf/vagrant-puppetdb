@@ -12,8 +12,8 @@ $ brew cask install vagrant
 ```
 
 *Other Operating Systems*
-- You will need a [hypervisor](https://developer.hashicorp.com/vagrant/docs/providers) to run Vagrant. [VirtualBox](https://www.virtualbox.org/wiki/Downloads) has options, as does [VMware](https://developer.hashicorp.com/vagrant/downloads/vmware)
-- Ultimately, you will need to be able to run [vagrant up](http://www.vagrantup.com/)
+- You will need a [hypervisor](https://developer.hashicorp.com/vagrant/docs/providers) to run Vagrant. [VirtualBox](https://www.virtualbox.org/wiki/Downloads) has options, as does [VMware](https://developer.hashicorp.com/vagrant/downloads/vmware).
+- Ultimately, you will need to be able to run [vagrant up](http://www.vagrantup.com/).
 
 *Clone the repo to your local system*
 ```
