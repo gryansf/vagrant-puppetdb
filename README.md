@@ -4,7 +4,7 @@ Bootstrap Puppetserver and PuppetDB with Puppet on Ubuntu Linux 20.04 LTS (Focal
 Setup
 -----
 
-*MacOS Requirements*
+*MacOS (Intel) Requirements*
 - [https://brew.sh](https://docs.brew.sh/Installation)
 ```
 $ brew cask install virtualbox
