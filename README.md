@@ -7,14 +7,12 @@ Setup
 - You will need [Vagrant](https://developer.hashicorp.com/vagrant/docs/installation)
 - Vagrant's out-of-box options for hypervisor support include [VirtualBox, Hyper-V, and Docker](https://developer.hashicorp.com/vagrant/docs/providers) 
 - VMware support comes in the form of an [installable plugin](https://developer.hashicorp.com/vagrant/docs/providers/vmware/vagrant-vmware-utility)
-
 *MacOS (Intel) Requirements*
 - [https://brew.sh](https://docs.brew.sh/Installation)
 ```
 $ brew cask install virtualbox
 $ brew cask install vagrant
 ```
-
 *Clone the repo to your local system*
 ```
 $ git clone https://github.com/gryansf/vagrant-puppetdb.git
