@@ -9,7 +9,7 @@ Setup
 - [VMware](https://developer.hashicorp.com/vagrant/docs/providers/vmware/vagrant-vmware-utility) support comes in the form of an installable plugin
 
 This project was developed on an Intel MacOS by performing the following steps:
-- [https://brew.sh](https://docs.brew.sh/Installation)
+- Install (Hombrew)(https://docs.brew.sh/Installation)
 ```
 $ brew cask install virtualbox
 $ brew cask install vagrant
