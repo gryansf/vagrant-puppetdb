@@ -3,6 +3,10 @@ Bootstrap Puppetserver and PuppetDB with Puppet on Ubuntu Linux 20.04 LTS (Focal
 
 Setup
 -----
+*General Requirements*
+- You will need [Vagrant](https://developer.hashicorp.com/vagrant/docs/installation)
+- Vagrant's out-of-box options for hypervisor support include [VirtualBox, Hyper-V, and Docker](https://developer.hashicorp.com/vagrant/docs/providers) 
+- VMware support comes in the form of an [installable plugin](https://developer.hashicorp.com/vagrant/docs/providers/vmware/vagrant-vmware-utility)
 
 *MacOS (Intel) Requirements*
 - [https://brew.sh](https://docs.brew.sh/Installation)
@@ -10,10 +14,6 @@ Setup
 $ brew cask install virtualbox
 $ brew cask install vagrant
 ```
-
-*Other Operating Systems*
-- You will need a [hypervisor](https://developer.hashicorp.com/vagrant/docs/providers) to run Vagrant. [VirtualBox](https://www.virtualbox.org/wiki/Downloads) has options, as does [VMware](https://developer.hashicorp.com/vagrant/downloads/vmware).
-- Ultimately, you will need to be able to run [vagrant up](http://www.vagrantup.com/).
 
 *Clone the repo to your local system*
 ```
