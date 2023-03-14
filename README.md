@@ -8,8 +8,9 @@ Setup
 - Vagrant's out-of-box options for hypervisor support include [VirtualBox, Hyper-V, and Docker](https://developer.hashicorp.com/vagrant/docs/providers) 
 - [VMware](https://developer.hashicorp.com/vagrant/docs/providers/vmware/vagrant-vmware-utility) support comes in the form of an installable plugin
 
-This project was developed on an Intel MacOS by performing the following steps:
+This project was developed on an Intel based Mac by performing the following steps:
 - Install (Hombrew)(https://docs.brew.sh/Installation)
+- Then:
 ```
 $ brew cask install virtualbox
 $ brew cask install vagrant
